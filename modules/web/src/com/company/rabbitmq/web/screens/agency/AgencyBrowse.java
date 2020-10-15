@@ -1,7 +1,7 @@
 package com.company.rabbitmq.web.screens.agency;
 
-import com.haulmont.cuba.gui.screen.*;
 import com.company.rabbitmq.entity.Agency;
+import com.haulmont.cuba.gui.screen.*;
 
 @UiController("rabbitmq_Agency.browse")
 @UiDescriptor("agency-browse.xml")

@@ -26,36 +26,31 @@ public class LenderBrowse extends MasterDetailScreen<Lender> {
 
     @Subscribe("sendToMQ")
     public void onSendToMQClick(Button.ClickEvent event) {
-
-        Lender selLender = table.getSingleSelected();
-
-        String result = rabbitSenderService.send(selLender);
-
-        notifications
-                .create()
-                .withType(Notifications.NotificationType.TRAY)
-                .withCaption("The Rabbit is notified with "+result)
-                .show();
+        publishMessageToMQ(table.getSingleSelected());
     }
 
     @Subscribe
     public void onBeforeCommitChanges(BeforeCommitChangesEvent event) {
-        Lender createdLender = getEditedEntity();
-
-        String result = rabbitSenderService.send(createdLender);
-
-        notifications
-                .create()
-                .withType(Notifications.NotificationType.TRAY)
-                .withCaption("The Rabbit is notified with "+result)
-                .show();
-
+        publishMessageToMQ(getEditedEntity());
     }
-
 
     @EventListener
     protected void onAgencyCreated(AgencyCreationEvent event) {
-        notifications.create().withType(Notifications.NotificationType.TRAY).withCaption(event.getMessage()).show();
+        createTrayNotification(event.getMessage());
+    }
+
+    private void publishMessageToMQ(Lender lender) {
+        String result = rabbitSenderService.send(lender);
+
+       createTrayNotification(result);
+    }
+
+    private void createTrayNotification(String message) {
+        notifications
+                .create()
+                .withType(Notifications.NotificationType.TRAY)
+                .withCaption("The Rabbit is notified with "+message)
+                .show();
     }
 
 }

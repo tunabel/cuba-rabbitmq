@@ -1,5 +1,4 @@
 <window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
-        xmlns:c="http://schemas.haulmont.com/cuba/screen/jpql_condition.xsd"
         caption="msg://lenderBrowse.caption"
         focusComponent="table"
         messagesPack="com.company.rabbitmq.web.screens.lender">

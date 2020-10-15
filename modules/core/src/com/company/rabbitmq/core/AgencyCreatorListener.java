@@ -3,7 +3,6 @@ package com.company.rabbitmq.core;
 import com.company.rabbitmq.config.RabbitMQConfig;
 import com.company.rabbitmq.entity.Agency;
 import com.company.rabbitmq.entity.Lender;
-
 import com.company.rabbitmq.service.AgencyCreationEvent;
 import com.haulmont.cuba.core.global.DataManager;
 import com.haulmont.cuba.core.global.Events;
@@ -14,7 +13,10 @@ import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Component;
 
 import javax.inject.Inject;
-import java.io.*;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectInputStream;
 
 @Component(AgencyCreatorListener.NAME)
 public class AgencyCreatorListener{
@@ -28,6 +30,7 @@ public class AgencyCreatorListener{
     @Inject
     private Events events;
 
+    //OPTION 1: Annotate the method with @RabbitListener
     @RabbitListener(queues = RabbitMQConfig.CUBAQUEUE, containerFactory = "inputListenerContainerFactory")
     public void receivedMessage(Lender lender) {
         authentication.begin();
@@ -43,7 +46,7 @@ public class AgencyCreatorListener{
     }
 
 
-    //Another option is let this Listener implements MessageListener and thus overriding this onMessage method.
+    //OPTION 2: is let this Listener implements MessageListener and thus overriding this onMessage method.
     //but then we will need other way to pass Lender object to the outside
     //Remember to edit RabbitMQConfig.java
     public void onMessage(Message message) {
