@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:rabbit="http://www.springframework.org/schema/rabbit">
+    <!-- Annotation-based beans -->
+    <context:component-scan base-package="com.company.rabbitmq"/>
+
+    <!--    Rabbit connection -->
+<!--    <rabbit:connection-factory id="connectionFactory" host="localhost" username="guest" password="guest"/>-->
+
+<!--    <rabbit:template id="amqpTemplate" connection-factory="connectionFactory"-->
+<!--                     exchange="cubaexchange" />-->
+
+
+<!--    &lt;!&ndash;    Rabbit Sender config beans&ndash;&gt;-->
+<!--    <rabbit:admin connection-factory="connectionFactory"/>-->
+
+<!--    <rabbit:queue name="cubaqueue"/>-->
+
+<!--    <rabbit:fanout-exchange name="cubaexchange">-->
+<!--        <rabbit:bindings>-->
+<!--            <rabbit:binding queue="cubaqueue"/>-->
+<!--        </rabbit:bindings>-->
+<!--    </rabbit:fanout-exchange>-->
+
+<!--&lt;!&ndash;    <bean class="org.springframework.amqp.rabbit.core.RabbitTemplate">&ndash;&gt;-->
+<!--&lt;!&ndash;        <property name="messageConverter">&ndash;&gt;-->
+<!--&lt;!&ndash;            <bean class="org.springframework.amqp.support.converter.JsonMessageConverter">&ndash;&gt;-->
+<!--&lt;!&ndash;            </bean>&ndash;&gt;-->
+<!--&lt;!&ndash;        </property>&ndash;&gt;-->
+<!--&lt;!&ndash;    </bean>&ndash;&gt;-->
+
+    <!-- Rabbit listener config beans -->
+
+<!--    <rabbit:listener-container connection-factory="connectionFactory">-->
+<!--        <rabbit:listener ref="agencyGenerator" queue-names="cubaqueue"-->
+<!--        />-->
+<!--    </rabbit:listener-container>-->
+
+
+<!--    <bean id="agencyGenerator" class="com.company.rabbitmq.core.AgencyCreatorListener"/>-->
+
+</beans>
